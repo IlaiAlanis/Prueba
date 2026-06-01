@@ -1,14 +1,11 @@
-/* ══ VIEWPORT HEIGHT FIX (evita reajuste al esconder barra del navegador) ══ */
+/* ══ VIEWPORT HEIGHT FIX ══ */
 function lockViewportHeight() {
   const h = window.innerHeight;
   document.documentElement.style.setProperty('--hero-h', h + 'px');
   document.documentElement.style.setProperty('--strip-h', h + 'px');
 }
 lockViewportHeight();
-// Solo re-lock en orientación change, NO en resize (que lo dispara la barra del nav)
-window.addEventListener('orientationchange', () => {
-  setTimeout(lockViewportHeight, 300);
-});
+window.addEventListener('orientationchange', () => setTimeout(lockViewportHeight, 300));
 
 /* ══ COUNTDOWN ══ */
 const EVENTO = new Date('2026-07-11T19:00:00');
@@ -43,22 +40,32 @@ const revealObs = new IntersectionObserver((entries) => {
 document.querySelectorAll('.reveal').forEach(el => revealObs.observe(el));
 
 /* ══ HERO PARALLAX ══ */
-const heroBg  = document.getElementById('heroBg');
-const heroEl  = heroBg ? heroBg.closest('.hero') : null;
-let ticking   = false;
+const heroBg = document.getElementById('heroBg');
+const heroEl = heroBg ? heroBg.closest('.hero') : null;
+let ticking  = false;
+let heroActive = true;
+
+// Deja de aplicar parallax cuando el hero sale del viewport
+if (heroEl) {
+  const heroExitObs = new IntersectionObserver((entries) => {
+    heroActive = entries[0].isIntersecting;
+    // Cuando el hero sale, limpia el transform para no dejar valor residual
+    if (!heroActive && heroBg) {
+      heroBg.style.transform = 'translateY(0)';
+    }
+  }, { threshold: 0 });
+  heroExitObs.observe(heroEl);
+}
 
 function applyParallax() {
-  if (!heroBg || !heroEl) return;
-  const heroBottom = heroEl.getBoundingClientRect().bottom + window.scrollY;
-  const y = window.scrollY;
-  if (y <= heroBottom) {
-    heroBg.style.transform = `translateY(${y * 0.3}px)`;
+  if (heroBg && heroActive) {
+    heroBg.style.transform = `translateY(${window.scrollY * 0.3}px)`;
   }
   ticking = false;
 }
 
 window.addEventListener('scroll', () => {
-  if (!ticking) {
+  if (!ticking && heroActive) {
     requestAnimationFrame(applyParallax);
     ticking = true;
   }
