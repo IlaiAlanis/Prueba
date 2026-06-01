@@ -32,24 +32,26 @@ body {
 
 /* ══ FIXED BACKGROUND ══ */
 /*
-  The scene background sits behind all content and is fixed to the viewport.  On
-  mobile devices the browser's URL bar can collapse as you scroll, causing
-  `position: fixed` elements to change height dynamically while other sections
-  sized with static `vh` units do not.  This mismatch is what causes the
-  background "jump" observed on some phones.  To stabilise the background
-  across URL‑bar transitions we explicitly size it using the small viewport
-  height (svh) unit.  The `svh` unit corresponds to the viewport height when
-  browser chrome is fully expanded, so it matches the hero section defined
-  below (`min-height: 100svh`).  If the browser collapses its chrome the
-  background will maintain its initial height and no longer reflow, preventing
-  the unsightly jump.
-*/
+ * Fixed backgrounds: ensure they track the same viewport height as the hero.
+ * Instead of using the ambiguous `inset: 0` declaration (which makes the
+ * element resize with the dynamic visual viewport on mobile), we explicitly
+ * set the top/left coordinates and specify the width and height using
+ * viewport units.  We provide a `100vh` fallback for older browsers and
+ * override it with `100dvh` for modern browsers.  Both `.scene-bg` and
+ * `.floral-overlay` therefore resize together with the hero when the
+ * browser UI (address bar) collapses or expands, preventing the visual jump
+ * where one element resizes and the other does not.
+ */
 .scene-bg {
   position: fixed;
   top: 0;
   left: 0;
   width: 100vw;
-  height: 100svh;
+  /* Fallback for older browsers: use the large viewport height */
+  height: 100vh;
+  /* Modern browsers: track the dynamic viewport height so the background
+     resizes in sync with the content */
+  height: 100dvh;
   z-index: 0;
   background-image: url('fotos/FONDO.png');
   background-size: cover;
@@ -58,19 +60,13 @@ body {
   pointer-events: none;
 }
 
-/*
-  The floral overlay sits above the scene background but beneath the main
-  content.  Just like the background, it should remain stable when the
-  viewport height changes due to mobile browser UI showing or hiding.  By
-  using 100svh for its height we keep it aligned with the background and
-  hero section without responding to dynamic viewport resizes.
-*/
 .floral-overlay {
   position: fixed;
   top: 0;
   left: 0;
   width: 100vw;
-  height: 100svh;
+  height: 100vh;
+  height: 100dvh;
   z-index: 0;
   pointer-events: none;
   overflow: hidden;
@@ -174,7 +170,13 @@ body {
 /* ══ HERO ══ */
 .hero {
   position: relative;
-  min-height: 100svh;
+  /* Fallback for older browsers: use the large viewport height */
+  min-height: 100vh;
+  /* Modern browsers: allow the hero to track the dynamic viewport height
+     so it grows/shrinks in tandem with the fixed background.  This avoids
+     the mismatch where the hero uses a static `svh` height but the
+     background adapts to the visual viewport. */
+  min-height: 100dvh;
   display: flex;
   flex-direction: column;
   z-index: 2;
