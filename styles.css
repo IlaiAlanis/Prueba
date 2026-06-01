@@ -31,26 +31,16 @@ body {
 }
 
 /* ══ FIXED BACKGROUND ══ */
-/*
- * Fixed backgrounds: ensure they track the same viewport height as the hero.
- * Instead of using the ambiguous `inset: 0` declaration (which makes the
- * element resize with the dynamic visual viewport on mobile), we explicitly
- * set the top/left coordinates and specify the width and height using
- * viewport units.  We provide a `100vh` fallback for older browsers and
- * override it with `100dvh` for modern browsers.  Both `.scene-bg` and
- * `.floral-overlay` therefore resize together with the hero when the
- * browser UI (address bar) collapses or expands, preventing the visual jump
- * where one element resizes and the other does not.
- */
 .scene-bg {
+  /* Use explicit coordinates and dynamic viewport height so the
+     background resizes in sync with the visible viewport on modern
+     browsers.  The `100vh` fallback ensures older browsers still
+     display a full-height background. */
   position: fixed;
   top: 0;
   left: 0;
   width: 100vw;
-  /* Fallback for older browsers: use the large viewport height */
   height: 100vh;
-  /* Modern browsers: track the dynamic viewport height so the background
-     resizes in sync with the content */
   height: 100dvh;
   z-index: 0;
   background-image: url('fotos/FONDO.png');
@@ -61,6 +51,7 @@ body {
 }
 
 .floral-overlay {
+  /* Match the dynamic sizing of the scene background */
   position: fixed;
   top: 0;
   left: 0;
@@ -170,12 +161,10 @@ body {
 /* ══ HERO ══ */
 .hero {
   position: relative;
-  /* Fallback for older browsers: use the large viewport height */
+  /* Fallback height for older browsers */
   min-height: 100vh;
-  /* Modern browsers: allow the hero to track the dynamic viewport height
-     so it grows/shrinks in tandem with the fixed background.  This avoids
-     the mismatch where the hero uses a static `svh` height but the
-     background adapts to the visual viewport. */
+  /* Track the dynamic viewport height so the hero resizes as the
+     browser UI collapses/expands. */
   min-height: 100dvh;
   display: flex;
   flex-direction: column;
@@ -763,4 +752,32 @@ body {
   .col { max-width: 900px; }
   .quote-inner { max-width: 760px; }
   .countdown-card { max-width: 740px; }
+}
+
+/*
+ * Responsive overrides for mobile screens (~<768px).  To mimic the
+ * behaviour of Canva websites on mobile, we avoid using fixed-position
+ * backgrounds when the screen is narrow.  When backgrounds remain
+ * fixed, the browser’s address bar may collapse and expand during
+ * scrolling, causing layout jumps【866495134770152†L150-L176】.  On small screens we
+ * let the backgrounds scroll with the page and let the hero grow
+ * naturally.  The parallax effect on the hero’s photo remains
+ * controlled by JavaScript and is not affected by these CSS changes.
+ */
+@media (max-width: 768px) {
+  .scene-bg,
+  .floral-overlay {
+    /* Remove fixed positioning so backgrounds scroll with content */
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: auto;
+    background-attachment: scroll;
+  }
+
+  .hero {
+    /* Let the hero height be determined by its content */
+    min-height: auto;
+  }
 }
