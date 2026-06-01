@@ -39,29 +39,20 @@ body {
   overflow-x: hidden;
   -webkit-overflow-scrolling: touch;
   scroll-behavior: smooth;
-}
-
-/* ══ FIXED BACKGROUND ══ */
-.scene-bg {
-  position: fixed;
-  inset: 0;
-  z-index: 0;
   background-image: url('fotos/FONDO.png');
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  pointer-events: none;
-  transform: translateZ(0);
+  background-attachment: local;
+}
+
+/* ══ FIXED BACKGROUND ══ */
+.scene-bg {
+  display: none;
 }
 
 .floral-overlay {
-  position: fixed;
-  inset: 0;
-  z-index: 0;
-  pointer-events: none;
-  overflow: hidden;
-  opacity: 0.18;
-  transform: translateZ(0);
+  display: none;
 }
 
 /* ══ LAYOUT ══ */
