@@ -1,3 +1,15 @@
+/* ══ VIEWPORT HEIGHT FIX (evita reajuste al esconder barra del navegador) ══ */
+function lockViewportHeight() {
+  const h = window.innerHeight;
+  document.documentElement.style.setProperty('--hero-h', h + 'px');
+  document.documentElement.style.setProperty('--strip-h', h + 'px');
+}
+lockViewportHeight();
+// Solo re-lock en orientación change, NO en resize (que lo dispara la barra del nav)
+window.addEventListener('orientationchange', () => {
+  setTimeout(lockViewportHeight, 300);
+});
+
 /* ══ COUNTDOWN ══ */
 const EVENTO = new Date('2026-07-11T19:00:00');
 const cdDays  = document.getElementById('cd-days');
@@ -39,7 +51,6 @@ function applyParallax() {
   if (!heroBg || !heroEl) return;
   const heroBottom = heroEl.getBoundingClientRect().bottom + window.scrollY;
   const y = window.scrollY;
-  // Solo aplica mientras el hero siga visible; al salir no hace nada (evita el salto)
   if (y <= heroBottom) {
     heroBg.style.transform = `translateY(${y * 0.3}px)`;
   }
