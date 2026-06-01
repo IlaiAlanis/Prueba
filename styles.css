@@ -28,10 +28,20 @@ body {
   font-family: 'Josefin Sans', sans-serif;
   font-weight: 300;
   overflow-x: hidden;
+  position: relative;
 }
 
 /* ══ FIXED BACKGROUND ══ */
 .scene-bg {
+  display: none;
+}
+
+.floral-overlay {
+  display: none;
+}
+
+body::before {
+  content: '';
   position: fixed;
   inset: 0;
   z-index: 0;
@@ -40,19 +50,19 @@ body {
   background-position: center;
   background-repeat: no-repeat;
   pointer-events: none;
-  will-change: transform;
   transform: translateZ(0);
+  will-change: transform;
 }
 
-.floral-overlay {
-  position: fixed;
-  inset: 0;
-  z-index: 0;
-  pointer-events: none;
-  overflow: hidden;
-  opacity: 0.18;
-  will-change: transform;
-  transform: translateZ(0);
+/* En móvil el fixed causa el salto — usamos un truco:
+   la imagen se pone en el body directamente y no se mueve */
+@media (max-width: 768px) {
+  body::before {
+    position: absolute;
+    height: 100%;
+    min-height: 100lvh;
+    background-attachment: scroll;
+  }
 }
 
 /* ══ LAYOUT ══ */
