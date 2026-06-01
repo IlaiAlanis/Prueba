@@ -1,11 +1,26 @@
 /* ══ VIEWPORT HEIGHT FIX ══ */
 function lockViewportHeight() {
-  const h = window.innerHeight;
-  document.documentElement.style.setProperty('--hero-h', h + 'px');
-  document.documentElement.style.setProperty('--strip-h', h + 'px');
+  const vh = window.innerHeight * 0.01;
+
+  document.documentElement.style.setProperty('--vh', `${vh}px`);
+  document.documentElement.style.setProperty('--hero-h', `${window.innerHeight}px`);
 }
+
 lockViewportHeight();
-window.addEventListener('orientationchange', () => setTimeout(lockViewportHeight, 300));
+
+let resizeTimeout;
+
+window.addEventListener('resize', () => {
+  clearTimeout(resizeTimeout);
+
+  resizeTimeout = setTimeout(() => {
+    lockViewportHeight();
+  }, 150);
+});
+
+window.addEventListener('orientationchange', () => {
+  setTimeout(lockViewportHeight, 300);
+});
 
 /* ══ COUNTDOWN ══ */
 const EVENTO = new Date('2026-07-11T19:00:00');
