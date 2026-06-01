@@ -1,27 +1,3 @@
-/* ══ VIEWPORT HEIGHT FIX ══ */
-function lockViewportHeight() {
-  const vh = window.innerHeight * 0.01;
-
-  document.documentElement.style.setProperty('--vh', `${vh}px`);
-  document.documentElement.style.setProperty('--hero-h', `${window.innerHeight}px`);
-}
-
-lockViewportHeight();
-
-let resizeTimeout;
-
-window.addEventListener('resize', () => {
-  clearTimeout(resizeTimeout);
-
-  resizeTimeout = setTimeout(() => {
-    lockViewportHeight();
-  }, 150);
-});
-
-window.addEventListener('orientationchange', () => {
-  setTimeout(lockViewportHeight, 300);
-});
-
 /* ══ COUNTDOWN ══ */
 const EVENTO = new Date('2026-07-11T19:00:00');
 const cdDays  = document.getElementById('cd-days');
@@ -44,15 +20,13 @@ updateCountdown();
 setInterval(updateCountdown, 1000);
 
 /* ══ SCROLL REVEAL ══ */
-const scroller = document.getElementById('scroll-container') || window;
-
 const revealObs = new IntersectionObserver((entries) => {
   entries.forEach((entry, i) => {
     if (!entry.isIntersecting) return;
     setTimeout(() => entry.target.classList.add('visible'), i * 80);
     revealObs.unobserve(entry.target);
   });
-}, { threshold: 0.08, root: document.getElementById('scroll-container') });
+}, { threshold: 0.08 });
 
 document.querySelectorAll('.reveal').forEach(el => revealObs.observe(el));
 
@@ -60,26 +34,20 @@ document.querySelectorAll('.reveal').forEach(el => revealObs.observe(el));
 const heroBg  = document.getElementById('heroBg');
 const heroEl  = heroBg ? heroBg.closest('.hero') : null;
 let ticking   = false;
-let heroActive = true;
-
-if (heroEl) {
-  const heroExitObs = new IntersectionObserver((entries) => {
-    heroActive = entries[0].isIntersecting;
-    if (!heroActive && heroBg) heroBg.style.transform = 'translateY(0)';
-  }, { threshold: 0, root: document.getElementById('scroll-container') });
-  heroExitObs.observe(heroEl);
-}
 
 function applyParallax() {
-  if (heroBg && heroActive) {
-    const y = scroller.scrollTop !== undefined ? scroller.scrollTop : window.scrollY;
-    heroBg.style.transform = `translateY(${y * 0.35}px)`;
+  if (!heroBg || !heroEl) return;
+  const heroBottom = heroEl.getBoundingClientRect().bottom + window.scrollY;
+  const y = window.scrollY;
+  // Solo aplica mientras el hero siga visible; al salir no hace nada (evita el salto)
+  if (y <= heroBottom) {
+    heroBg.style.transform = `translateY(${y * 0.3}px)`;
   }
   ticking = false;
 }
 
-scroller.addEventListener('scroll', () => {
-  if (!ticking && heroActive) {
+window.addEventListener('scroll', () => {
+  if (!ticking) {
     requestAnimationFrame(applyParallax);
     ticking = true;
   }
