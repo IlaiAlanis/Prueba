@@ -29,42 +29,41 @@ updateCountdown();
 setInterval(updateCountdown, 1000);
 
 /* ══ SCROLL REVEAL ══ */
+const scroller = document.getElementById('scroll-container') || window;
+
 const revealObs = new IntersectionObserver((entries) => {
   entries.forEach((entry, i) => {
     if (!entry.isIntersecting) return;
     setTimeout(() => entry.target.classList.add('visible'), i * 80);
     revealObs.unobserve(entry.target);
   });
-}, { threshold: 0.08 });
+}, { threshold: 0.08, root: document.getElementById('scroll-container') });
 
 document.querySelectorAll('.reveal').forEach(el => revealObs.observe(el));
 
 /* ══ HERO PARALLAX ══ */
-const heroBg = document.getElementById('heroBg');
-const heroEl = heroBg ? heroBg.closest('.hero') : null;
-let ticking  = false;
+const heroBg  = document.getElementById('heroBg');
+const heroEl  = heroBg ? heroBg.closest('.hero') : null;
+let ticking   = false;
 let heroActive = true;
 
-// Deja de aplicar parallax cuando el hero sale del viewport
 if (heroEl) {
   const heroExitObs = new IntersectionObserver((entries) => {
     heroActive = entries[0].isIntersecting;
-    // Cuando el hero sale, limpia el transform para no dejar valor residual
-    if (!heroActive && heroBg) {
-      heroBg.style.transform = 'translateY(0)';
-    }
-  }, { threshold: 0 });
+    if (!heroActive && heroBg) heroBg.style.transform = 'translateY(0)';
+  }, { threshold: 0, root: document.getElementById('scroll-container') });
   heroExitObs.observe(heroEl);
 }
 
 function applyParallax() {
   if (heroBg && heroActive) {
-    heroBg.style.transform = `translateY(${window.scrollY * 0.3}px)`;
+    const y = scroller.scrollTop ?? window.scrollY;
+    heroBg.style.transform = `translateY(${y * 0.3}px)`;
   }
   ticking = false;
 }
 
-window.addEventListener('scroll', () => {
+scroller.addEventListener('scroll', () => {
   if (!ticking && heroActive) {
     requestAnimationFrame(applyParallax);
     ticking = true;
