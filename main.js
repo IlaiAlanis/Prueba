@@ -57,8 +57,8 @@ if (heroEl) {
 
 function applyParallax() {
   if (heroBg && heroActive) {
-    const y = scroller.scrollTop ?? window.scrollY;
-    heroBg.style.transform = `translateY(${y * 0.3}px)`;
+    const y = scroller.scrollTop !== undefined ? scroller.scrollTop : window.scrollY;
+    heroBg.style.transform = `translateY(${y * 0.35}px)`;
   }
   ticking = false;
 }
