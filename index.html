@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>XV Años — Miranda</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Josefin+Sans:wght@100;300;400;600&family=Great+Vibes&display=swap" rel="stylesheet">
+
+  <link rel="preload" href="fotos/6.webp" as="image">
+  <link rel="preload" href="fotos/FONDO.png" as="image">
+
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<audio id="musicaFondo" loop>
+  <source src="/cancion/KISS ME AUDIO.mp3" type="audio/mpeg">
+</audio>
+
+<button id="botonMusica" class="music-btn" type="button" aria-label="Reproducir música">▶</button>
+<div class="music-label" aria-hidden="true">Reproduce ⤳</div>
+
+<div class="scene-bg"></div>
+
+<div class="floral-overlay" aria-hidden="true">
+  <svg viewBox="0 0 430 900" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" preserveAspectRatio="xMidYMid slice">
+    <g opacity="0.7">
+      <ellipse cx="40" cy="60" rx="28" ry="14" fill="#a8b89a" transform="rotate(-30 40 60)"/>
+      <ellipse cx="60" cy="35" rx="22" ry="10" fill="#b8c9a8" transform="rotate(20 60 35)"/>
+      <ellipse cx="25" cy="90" rx="18" ry="8" fill="#c8d6be" transform="rotate(-50 25 90)"/>
+      <circle cx="55" cy="55" r="7" fill="#d4b898"/>
+      <circle cx="35" cy="40" r="5" fill="#e0c990"/>
+      <ellipse cx="80" cy="20" rx="14" ry="6" fill="#b8c9a8" transform="rotate(15 80 20)"/>
+      <ellipse cx="100" cy="45" rx="20" ry="8" fill="#a8b89a" transform="rotate(-20 100 45)"/>
+      <ellipse cx="390" cy="50" rx="26" ry="12" fill="#b8c9a8" transform="rotate(25 390 50)"/>
+      <ellipse cx="370" cy="28" rx="18" ry="8" fill="#c8d6be" transform="rotate(-15 370 28)"/>
+      <circle cx="380" cy="65" r="6" fill="#d4b898"/>
+      <ellipse cx="410" cy="80" rx="20" ry="9" fill="#a8b89a" transform="rotate(40 410 80)"/>
+      <ellipse cx="20" cy="350" rx="30" ry="12" fill="#b8c9a8" transform="rotate(-35 20 350)"/>
+      <ellipse cx="50" cy="380" rx="22" ry="9" fill="#c8d6be" transform="rotate(10 50 380)"/>
+      <circle cx="38" cy="340" r="7" fill="#e0c990"/>
+      <ellipse cx="400" cy="370" rx="26" ry="11" fill="#a8b89a" transform="rotate(30 400 370)"/>
+      <circle cx="415" cy="350" r="5" fill="#d4b898"/>
+      <ellipse cx="30" cy="750" rx="32" ry="13" fill="#b8c9a8" transform="rotate(-20 30 750)"/>
+      <ellipse cx="65" cy="780" rx="24" ry="10" fill="#a8b89a" transform="rotate(15 65 780)"/>
+      <circle cx="45" cy="740" r="8" fill="#d4a898"/>
+      <ellipse cx="395" cy="760" rx="28" ry="12" fill="#c8d6be" transform="rotate(-30 395 760)"/>
+      <circle cx="410" cy="780" r="6" fill="#e0c990"/>
+    </g>
+    <g opacity="0.5">
+      <circle cx="150" cy="100" r="4" fill="#d4b898"/>
+      <circle cx="280" cy="80" r="3" fill="#b8c9a8"/>
+      <circle cx="200" cy="200" r="3" fill="#d4a898"/>
+      <circle cx="340" cy="300" r="4" fill="#e0c990"/>
+      <circle cx="90" cy="500" r="3" fill="#c8d6be"/>
+      <circle cx="350" cy="550" r="4" fill="#d4b898"/>
+      <circle cx="130" cy="680" r="3" fill="#a8b89a"/>
+    </g>
+  </svg>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-photo-bg" id="heroBg"></div>
+  <div class="hero-gradient"></div>
+
+  <div class="hero-top">
+    <div class="monogram" aria-hidden="true">XV</div>
+  </div>
+
+  <div class="hero-bottom">
+    <p class="hero-eyebrow">Una celebración especial</p>
+    <h1 class="hero-name">Miranda</h1>
+    <p class="hero-sub">Mis quince años</p>
+
+    <div class="orn" aria-hidden="true">
+      <div class="orn-line"></div>
+      <div class="orn-diamond"></div>
+      <div class="orn-line r"></div>
+    </div>
+
+    <p class="hero-date-line">11 · Julio · 2026</p>
+    <p class="hero-location-line">Guadalupe, N.L.</p>
+
+    <button class="btn-primary" onclick="addToCalendar()">+ Agregar a Calendario</button>
+  </div>
+</section>
+
+<!-- QUOTE -->
+<section class="quote-wrap reveal">
+  <div class="quote-inner">
+    <p class="quote-intro">Con inmenso amor, mis padres</p>
+    <h2 class="quote-parents">Liliana &nbsp;&amp;&nbsp; Martin</h2>
+    <div class="quote-divider"></div>
+    <p class="quote-dedication">comparten conmigo este momento tan especial y me dedican estas palabras:</p>
+    <div class="quote-glyph" aria-hidden="true">❝</div>
+    <p class="quote-text">
+      Mi princesa, este día marca el fin de tu niñez y el inicio
+      de una etapa llena de sueños.
+      Camina con la cabeza en alto, el corazón bondadoso
+      y la certeza de que papá y mamá siempre estarán para ti.
+    </p>
+  </div>
+</section>
+
+<!-- COUNTDOWN -->
+<section class="countdown-wrap reveal" aria-label="Cuenta regresiva">
+  <div class="countdown-card">
+    <p class="cd-tag">Faltan</p>
+    <p class="cd-date">Sábado 11 de Julio de 2026</p>
+    <p class="cd-label">Para el gran día</p>
+    <div class="cd-grid">
+      <div class="cd-item"><span class="cd-num" id="cd-days">00</span><span class="cd-lbl">Días</span></div>
+      <div class="cd-item"><span class="cd-num" id="cd-hours">00</span><span class="cd-lbl">Horas</span></div>
+      <div class="cd-item"><span class="cd-num" id="cd-mins">00</span><span class="cd-lbl">Minutos</span></div>
+      <div class="cd-item"><span class="cd-num" id="cd-secs">00</span><span class="cd-lbl">Segundos</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- SCENIC STRIP 1 -->
+<div class="scenic-strip" aria-hidden="true">
+  <div class="scenic-strip-inner">
+    <img src="fotos/1.webp" alt="" loading="lazy">
+  </div>
+</div>
+
+<!-- VENUES -->
+<section class="section-wrap">
+  <div class="col">
+    <div class="card reveal">
+      <p class="tag" style="text-align:center">Itinerario del evento</p>
+      <h2 class="serif-title" style="text-align:center;margin-bottom:8px">¿Cuándo y <em>Dónde?</em></h2>
+      <div class="orn" aria-hidden="true"><div class="orn-line"></div><div class="orn-diamond"></div><div class="orn-line r"></div></div>
+      <p class="body-text" style="text-align:center;margin-bottom:28px">
+        A continuación encontrarás el horario y ubicación de mis XV, con acceso directo a Google Maps.
+      </p>
+
+      <div class="venue-card reveal">
+        <div class="venue-photo-bar">
+          <img src="fotos/FOTO SALON.webp" alt="Salón Azul Eventos" loading="lazy">
+        </div>
+        <div class="venue-body">
+          <p class="venue-name">Salón Azul Eventos</p>
+          <p class="venue-meta">Sábado 11 de Julio del 2026<br>07:00 PM</p>
+          <p class="venue-address">Eloy Cavazos 470, Rincón de La Sierra, 67194 Guadalupe, N.L.</p>
+          <a class="btn-map" href="https://maps.app.goo.gl/ns18BKS4GzVtttGq5" target="_blank" rel="noopener">→ Ir al Mapa</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SEPARATOR -->
+<div class="floral-sep reveal" aria-hidden="true">
+  <div class="western-sep">
+    <span>✿</span><div class="sep-line"></div><span class="star">✦</span><div class="sep-line"></div><span>✿</span>
+  </div>
+</div>
+
+<!-- ITINERARY -->
+<section class="section-wrap">
+  <div class="col">
+    <div class="card reveal">
+      <p class="tag" style="text-align:center">Programa del día</p>
+      <h2 class="serif-title" style="text-align:center;margin-bottom:4px"><em>Itinerario</em></h2>
+      <div class="orn" aria-hidden="true"><div class="orn-line"></div><div class="orn-diamond"></div><div class="orn-line r"></div></div>
+      <div class="timeline">
+        <div class="tl-item reveal"><p class="tl-time">07:00 PM</p><p class="tl-event">Apertura de Salon</p><p class="tl-venue">Azul Eventos</p></div>
+        <div class="tl-item reveal"><p class="tl-time">07:30 PM</p><p class="tl-event">Presentacion de la Quinceañera</p><p class="tl-venue">Azul Eventos</p></div>
+        <div class="tl-item reveal"><p class="tl-time">08:00 PM</p><p class="tl-event">Apertura de Pista de Baile</p><p class="tl-venue">Azul Eventos</p></div>
+        <div class="tl-item reveal"><p class="tl-time">08:50 PM</p><p class="tl-event">Cena</p><p class="tl-venue">Azul Eventos</p></div>
+        <div class="tl-item reveal"><p class="tl-time">09:30 PM</p><p class="tl-event">Batucada</p><p class="tl-venue">Azul Eventos</p></div>
+        <div class="tl-item reveal"><p class="tl-time">10:00 PM</p><p class="tl-event">Grupo</p><p class="tl-venue">Azul Eventos</p></div>
+        <div class="tl-item reveal"><p class="tl-time">12:00 AM</p><p class="tl-event">Mariachi</p><p class="tl-venue">Azul Eventos</p></div>
+        <div class="tl-item reveal"><p class="tl-time">01:00 AM</p><p class="tl-event">Fin de Evento</p><p class="tl-venue">Azul Eventos</p></div>
+      </div>
+
+      <div class="itinerary-note">
+        <p>
+          La presentación de la quinceañera dará inicio puntualmente a las 7:30 PM.<br>
+          Les invitamos cordialmente a llegar con anticipación.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SCENIC STRIP 2 -->
+<div class="scenic-strip" aria-hidden="true">
+  <div class="scenic-strip-inner">
+    <img src="fotos/5.webp" alt="" loading="lazy">
+  </div>
+</div>
+
+<!-- DRESS CODE -->
+<section class="section-wrap">
+  <div class="col">
+    <div class="card reveal" style="text-align:center">
+      <p class="tag">Etiqueta del evento</p>
+      <h2 class="serif-title" style="margin-bottom:8px">Dress <em>Code</em></h2>
+      <p class="dress-note">Agradecemos evitar tonalidades verdes, ya que será el color especial de la quinceañera.</p>
+      <div class="orn" aria-hidden="true"><div class="orn-line"></div><div class="orn-diamond"></div><div class="orn-line r"></div></div>
+      <p class="dress-formal">Formal o <br> Western Chic</p>
+      <div class="dress-image-wrap">
+        <img src="fotos/DRESSCODEB.png" alt="Dress code: formal o western chic" loading="lazy">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SEPARATOR -->
+<div class="floral-sep reveal" aria-hidden="true">
+  <div class="western-sep">
+    <span>✿</span><div class="sep-line"></div><span class="star">✦</span><div class="sep-line"></div><span>✿</span>
+  </div>
+</div>
+
+<!-- QR FOTOS -->
+<section class="section-wrap">
+  <div class="col">
+    <div class="card reveal" style="text-align:center">
+      <p class="tag">Comparte el momento</p>
+      <h2 class="serif-title" style="margin-bottom:14px">QR de <em>Fotos</em></h2>
+      <div class="orn" aria-hidden="true"><div class="orn-line"></div><div class="orn-diamond"></div><div class="orn-line r"></div></div>
+      <p class="body-text" style="margin-bottom:6px">¡Quisiera que compartieras conmigo los momentos más importantes del evento!</p>
+      <p class="body-text" style="font-family:'Cormorant Garamond',serif;font-size:16px;font-style:italic;color:var(--charcoal);margin-bottom:20px">¡Agrega tus fotos del evento aquí!</p>
+      <div class="qr-wrapper">
+        <div class="qr-box">
+          <img src="fotos/QR.png" width="260" height="260" alt="Código QR para compartir fotos" loading="lazy">
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SCENIC STRIP 3 -->
+<div class="scenic-strip" aria-hidden="true">
+  <div class="scenic-strip-inner">
+    <img src="fotos/4.webp" alt="" loading="lazy">
+  </div>
+</div>
+
+<!-- MESA DE REGALOS -->
+<section class="section-wrap">
+  <div class="col">
+    <div class="card reveal" style="text-align:center">
+      <p class="tag">Con cariño</p>
+      <h2 class="serif-title" style="margin-bottom:14px">Mesa de <em>Regalos</em></h2>
+      <p class="body-text" style="margin-bottom:24px">Tu presencia es lo más importante para mí, pero si deseas hacerme un obsequio, con gusto recibo tu cariño de estas formas:</p>
+      <div class="orn" aria-hidden="true"><div class="orn-line"></div><div class="orn-diamond"></div><div class="orn-line r"></div></div>
+
+      <div class="regalo-item">
+        <div class="regalo-icon">
+          <svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg" width="44" height="44" aria-hidden="true">
+            <rect x="4" y="10" width="40" height="28" rx="3" fill="none" stroke="var(--pistachio-dk)" stroke-width="2"/>
+            <polyline points="4,10 24,27 44,10" fill="none" stroke="var(--pistachio-dk)" stroke-width="2"/>
+            <line x1="4" y1="38" x2="18" y2="25" stroke="var(--pistachio-dk)" stroke-width="1.5"/>
+            <line x1="44" y1="38" x2="30" y2="25" stroke="var(--pistachio-dk)" stroke-width="1.5"/>
+          </svg>
+        </div>
+        <p class="regalo-label">Caja de Sobres</p>
+        <p class="regalo-desc">Tendremos una caja para sobres el día del evento.</p>
+      </div>
+
+      <div class="regalo-hr"></div>
+
+      <div class="regalo-item">
+        <div class="regalo-icon">
+          <svg viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg" width="44" height="44" aria-hidden="true">
+            <rect x="4" y="12" width="40" height="26" rx="4" fill="none" stroke="var(--pistachio-dk)" stroke-width="2"/>
+            <rect x="4" y="18" width="40" height="6" fill="var(--pistachio-dk)" opacity="0.2"/>
+            <rect x="10" y="28" width="10" height="3" rx="1" fill="var(--pistachio-dk)" opacity="0.6"/>
+            <rect x="24" y="28" width="6" height="3" rx="1" fill="var(--pistachio-dk)" opacity="0.4"/>
+            <circle cx="36" cy="29.5" r="1.5" fill="var(--pistachio-dk)" opacity="0.4"/>
+          </svg>
+        </div>
+        <p class="regalo-label">Transferencia Bancaria</p>
+        <div class="bank-table">
+          <p class="bank-row"><span>Banco</span><strong>Mercado Pago W</strong></p>
+          <p class="bank-row"><span>CLABE</span><strong>722969017224798908</strong></p>
+          <p class="bank-row"><span>A nombre de</span><strong>Martin Gonzalez Vera</strong></p>
+          <p class="bank-row"><span>Concepto</span><strong>XV Años Miranda</strong></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SEPARATOR -->
+<div class="floral-sep reveal" aria-hidden="true">
+  <div class="western-sep">
+    <span>✿</span><div class="sep-line"></div><span class="star">✦</span><div class="sep-line"></div><span>✿</span>
+  </div>
+</div>
+
+<!-- CONFIRMACIÓN -->
+<section class="section-wrap">
+  <div class="col">
+    <div class="card reveal" style="text-align:center">
+      <p class="tag">Tu presencia importa</p>
+      <h2 class="serif-title" style="margin-bottom:20px">Confirmación de <em>Asistencia</em></h2>
+      <div class="orn" aria-hidden="true"><div class="orn-line"></div><div class="orn-diamond"></div><div class="orn-line r"></div></div>
+      <p class="confirm-body">¡Quisiera compartir este momento tan esperado contigo!<br>Por favor ayúdame confirmando tu asistencia.</p>
+      <p class="confirm-instructions">A continuación aparecerá un botón en el cual deberás dar clic y te guiará a confirmar tu asistencia por medio de WhatsApp.</p>
+      <a class="btn-whatsapp" href="https://wa.me/528188681546?text=¡Hola!%20Confirmo%20mi%20asistencia%20a%20los%20XV%20Años%20de%20Miranda%20" target="_blank" rel="noopener">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+          <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+        </svg>
+        Confirmar Asistencia vía WhatsApp
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <p class="footer-name">Miranda</p>
+  <p class="footer-xv">Mis XV Años</p>
+  <div class="footer-line"></div>
+  <p class="footer-msg">Es un honor tenerte presente en este momento tan especial de mi vida. Tu presencia hace esta noche perfecta.</p>
+  <div class="orn" style="max-width:200px;margin:20px auto 16px" aria-hidden="true">
+    <div class="orn-line" style="background:linear-gradient(to right,transparent,#a8b89a)"></div>
+    <div class="orn-diamond" style="background:#a8b89a"></div>
+    <div class="orn-line r" style="background:linear-gradient(to left,transparent,#a8b89a)"></div>
+  </div>
+  <p class="footer-small">11 · Julio · 2026 · Guadalupe, N.L.</p>
+</footer>
+
+<script src="main.js" defer></script>
+</body>
+</html>
